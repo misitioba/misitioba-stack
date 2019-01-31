@@ -1,0 +1,5 @@
+extends incuLayout
+block content
+	h1 resources
+block scripts
+	script(src="/js/resources")

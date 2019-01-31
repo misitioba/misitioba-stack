@@ -1,0 +1,74 @@
+(wildcard_cert) {
+    tls {
+        dns cloudflare
+        wildcard
+    }
+}
+
+https://misitioba.com, https://www.misitioba.com {
+	root projects/ba-landing/public_html
+}
+
+https://netdata.misitioba.com {
+	import wildcard_cert
+  proxy / localhost:19999
+  basicauth / root 1990
+}
+
+https://docker.misitioba.com {
+	import wildcard_cert
+	proxy / localhost:9000
+}
+
+https://mongo.misitioba.com {
+	import wildcard_cert
+	proxy / localhost:8081
+}
+
+https://api.misitioba.com {
+	import wildcard_cert
+	proxy / localhost:8084
+}
+
+https://editor.wrapkend.com {
+	import wildcard_cert
+	proxy / localhost:3503
+}
+
+https://apiba.wrapkend.com {
+	import wildcard_cert
+	proxy / localhost:8235
+}
+
+https://cms.misitioba.com {
+	import wildcard_cert
+	proxy / localhost:8130
+}
+
+https://hosting.misitioba.com {
+	import wildcard_cert
+	root sites/ba-hosting
+}
+
+https://misitioba.wrapkend.com {
+  import wildcard_cert
+	root instances/misitioba/public_html
+}
+
+https://incubadoraitinerante.com, http://incubadoraitinerante.com, https://www.incubadoraitinerante.com , http://www.incubadoraitinerante.com {
+	proxy / localhost:8200
+}
+https://wrapkend.com, http://wrapkend.com, https://www.wrapkend.com, http://www.wrapkend.com {
+	proxy / localhost:3601
+}
+
+https://strawhatsdemo.misitioba.com {
+	import wildcard_cert
+	root projects/mys-hats/docs
+}
+
+https://strawhatscollection.com {
+	root projects/mys-hats/docs
+}
+
+	

@@ -1,0 +1,5 @@
+extends incuLayout
+block content
+	+article(article.title,article.html, article)
+block scripts
+	script(src="/js/news")

@@ -1,0 +1,119 @@
+(() => {
+	var url = 'https://apiba.wrapkend.com/';
+	var namespace = ''
+
+	window.misitiobaApi = {
+		test: async function() {
+			misitiobaApi.configure('incuba')
+			let r = await misitiobaApi.save('articles', {
+				name: 'viaje_noviembre',
+				title: "Nuestro viaje empieza en noviembre",
+				content: 'Lorem Ipsum',
+				created_at: Date.now()
+			}, {
+				match: {
+					name: {
+						$eq: 'viaje_noviembre'
+					}
+				}
+			});
+			
+			/*
+			r = await misitiobaApi.remove('articles',{
+				name: {
+					$eq: 'viaje_noviembre'
+				}
+			})*/
+			
+			r = await misitiobaApi.browse('articles',{})
+
+			console.log('result', r)
+		},
+		configure: (_namespace) => {
+			namespace = _namespace;
+		},
+		browse: (collection, data, options) => {
+			return httpPost(url + 'browse', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		},
+		read: (collection, data, options) => {
+			return httpPost(url + 'read', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		},
+		save: (collection, data, options) => {
+			return httpPost(url + 'save', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		},
+		remove: (collection, data, options) => {
+			return httpPost(url + 'remove', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		}
+	}
+
+	function httpGet(url, options) {
+		options.type = 'get'
+		return httpPost(url, {}, options)
+	}
+
+	function httpPost(url, data, options) {
+		if (!options) {
+			options = {}
+		}
+		var withCredentials = options && options.withCredentials == false ? false : false
+		return new Promise((resolve, reject) => {
+			if (!data) {
+				data = {};
+			}
+			try {
+				var payload = {
+					type: 'post',
+					url: url,
+					crossDomain: true,
+					data: JSON.stringify(data),
+					contentType: 'application/json; charset=utf-8',
+					xhrFields: {
+						withCredentials: withCredentials
+					}
+				}
+				if (options.type === 'get') {
+					payload.type = 'get'
+					delete payload.data;
+				}
+				$.ajax(payload).always(function(response, status, xhr) {
+					if (status == 'error') {
+						reject({
+							message: "error",
+							detail: xhr
+						});
+					}
+					if (!response) {
+						return resolve(response)
+					}
+					if (response.err) {
+						reject(response.err);
+					} else {
+						resolve(response.result || response)
+					}
+				});
+			} catch (err) {
+				reject(err)
+			}
+		});
+	}
+})();

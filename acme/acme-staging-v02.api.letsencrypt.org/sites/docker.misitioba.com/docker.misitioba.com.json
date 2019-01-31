@@ -1,0 +1,5 @@
+{
+	"domain": "docker.misitioba.com",
+	"certUrl": "https://acme-staging-v02.api.letsencrypt.org/acme/cert/fac05d3bba6fd67f433947d821e0ba684029",
+	"certStableUrl": "https://acme-staging-v02.api.letsencrypt.org/acme/cert/fac05d3bba6fd67f433947d821e0ba684029"
+}

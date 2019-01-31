@@ -1,0 +1,9 @@
+*.log
+.env
+projects
+instances
+.codetasty
+node_modules
+mongo/data
+mongo/backups/dump
+!mongo/backups/latest.tar.gz

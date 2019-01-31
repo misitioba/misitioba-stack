@@ -1,0 +1,12 @@
+module.exports = app => {
+	
+	app.srv.misitiobaApi.configure('incuba')
+	
+	app.get('/admin', (req,res)=>{
+		res.sendView('admin')
+	});
+	app.get('/admin/login', (req,res)=>{
+		res.sendView('adminLogin')
+	});
+	
+}

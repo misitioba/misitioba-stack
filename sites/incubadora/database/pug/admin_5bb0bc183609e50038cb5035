@@ -1,0 +1,29 @@
+extends incuLayoutAdmin.pug
+block content
+	a(href="/admin/articles") articles
+	.row.no-gutters.vue
+		.col-12.mt-3
+			h3 Donde estamos ahora?
+			.row.no-gutters
+				.col-12
+					vue-google-autocomplete(id="map" classname="form-control" placeholder="Start typing" v-on:placechanged="getAddressData" ref="address")
+block scripts
+	script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFykYeC3UaGHSVFUsCBC7-vAstIr0ST2Y&libraries=places" type="text/javascript")
+	script(src="/js/vueAutocomplete" 
+	type="application/javascript")
+	script.
+		new Vue({
+			el:'.vue',
+			created(){
+				db.getData('/location').then(r=>{
+					this.$refs.address.update(r.formatted_address);
+				});
+			},
+			methods:{
+				getAddressData(v,p){
+					var address = v;
+					address.formatted_address = p.formatted_address;
+					db.push('/location', address).then(console.info);
+				}
+			}
+		})   

@@ -1,0 +1,196 @@
+new Vue({
+	name: 'article',
+	el: '#article',
+	data() {
+		return {
+			markdown: '',
+			html: '',
+			item: Object.assign({
+				name: '',
+				title: '',
+				contents: ''
+			}, window.initialState || {})
+		}
+	},
+	computed: {
+		link,
+		renderedHTML
+	},
+	methods: {
+		markdownToHTML,
+		remove,
+		parseName,
+		save,
+		checkFields,
+		htmlToMarkdown,
+		//moveToHTML
+	},
+	async mounted() {
+		try {
+			this.html = window.decodeURIComponent(window.atob(this.item.contents));
+		} catch (err) {
+
+		}
+
+		let markdown = this.htmlToMarkdown();
+		await loadMonaco(this, markdown);
+		this.editor.setValue(markdown);
+
+		if (this.item._id) {
+			this.item._originalName = this.item.name
+		}
+		misitiobaApi.configure('incuba')
+
+		$('#wysiwyg').summernote({
+			minHeight: 300,
+			callbacks: {
+				onChange: (contents, $editable) => {
+					this.html = contents;
+					this.htmlToMarkdown();
+				}
+			}
+		});
+		$('#wysiwyg').summernote('code', this.html);
+	}
+})
+
+function markdownToHTML() {
+	var converter = new showdown.Converter();
+	this.html = converter.makeHtml(this.editor.getValue());
+	$('#wysiwyg').summernote('code', this.html);
+	return html;
+}
+
+function moveToHTML() {
+	this.html = $('#wysiwyg').summernote('code');
+}
+
+function renderedHTML() {
+	try {
+		let html = window.marked(this.html);
+		let wrapper = $('<div/>').html(html)
+		wrapper.find('img').addClass('img-fluid');
+		return wrapper.html();
+	} catch (err) {
+		return '';
+	}
+}
+
+
+function htmlToMarkdown() {
+	var turndownService = new TurndownService()
+	this.markdown = turndownService.turndown(this.html);
+	if (this.editor) {
+		this.editor.setValue(this.markdown);
+	}
+	return this.markdown;
+}
+
+function loadMonaco(vm, defaultMarkdown) {
+	return new Promise((resolve, reject) => {
+		//https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html#wordwrap
+		require.config({
+			paths: {
+				'vs': 'https://unpkg.com/monaco-editor@0.8.3/min/vs'
+			}
+		});
+		window.MonacoEnvironment = {
+			getWorkerUrl: () => proxy
+		};
+		let proxy = URL.createObjectURL(new Blob([`
+	self.MonacoEnvironment = {
+		baseUrl: 'https://unpkg.com/monaco-editor@0.8.3/min/'
+	};
+	importScripts('https://unpkg.com/monaco-editor@0.8.3/min/vs/base/worker/workerMain.js');
+`], {
+			type: 'text/markdown'
+		}));
+		require(["vs/editor/editor.main"], function() {
+			let editor = monaco.editor.create(document.getElementById('container'), {
+				value: defaultMarkdown,
+				language: 'markdown',
+				theme: 'vs-light',
+				wordWrap: true
+			});
+			editor.addListener('didType', () => {
+				vm.markdown = editor.getValue()
+			});
+			vm.editor = editor;
+			resolve();
+		});
+	})
+}
+
+function parseName() {
+	this.item.name = this.item.name.split('_').join('-').trim().split(' ').join('-').toLowerCase()
+}
+
+function link() {
+	if (this.item.name) {
+		return this.item.name.split('_').join('-').trim().split(' ').join('').toLowerCase()
+	} else {
+		return "[name required]"
+	}
+}
+
+function checkFields() {
+	if (!this.item.name) {
+		showMessage({
+			text: 'Name required'
+		});
+		return false;
+	}
+	if (!this.item.title) {
+		showMessage({
+			text: 'Title required'
+		});
+		return false;
+	}
+	if (!this.html) {
+		showMessage({
+			text: 'Message required'
+		});
+		return false;
+	}
+	return true;
+}
+
+async function remove() {
+	let name = this.item._originalName || this.item._id;
+	if (window.confirm('Remove ' + name + '?')) {
+		await misitiobaApi.remove('articles', {
+			name: {
+				$eq: name
+			}
+		})
+		window.location.href = "/admin/articles"
+	}
+}
+
+async function save() {
+	if (this.checkFields()) {
+		this.item.created_at = Date.now()
+		let payload = Object.assign({}, this.item);
+		payload.contents = window.btoa(encodeURIComponent(this.html));
+		if (typeof payload._id !== 'string') {
+			delete payload._id
+		}
+		var options = {}
+		if (payload._id) {
+			options = {
+				match: {
+					name: {
+						$eq: this.item._originalName || this.item._id
+					}
+				}
+			}
+		}
+		let r = await misitiobaApi.save('articles', payload, options)
+		try {
+			window.location.href = "/admin/article/" + payload.name
+		} catch (err) {}
+		showMessage({
+			text: 'Saved'
+		})
+	}
+}

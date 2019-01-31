@@ -1,0 +1,12 @@
+{
+	"Email": "arancibiajav@gmail.com",
+	"Registration": {
+		"body": {
+			"status": "valid",
+			"contact": [
+				"mailto:arancibiajav@gmail.com"
+			]
+		},
+		"uri": "https://acme-v02.api.letsencrypt.org/acme/acct/45355680"
+	}
+}

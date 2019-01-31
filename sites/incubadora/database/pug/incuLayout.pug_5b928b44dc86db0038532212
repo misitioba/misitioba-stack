@@ -1,0 +1,30 @@
+include incuMixins
+
+head
+	+head()
+	script.
+		var initialState = JSON.parse(`!{JSON.stringify(initialState||{})}`)
+	block head
+		title Incubadora Itinerante
+body
+	#app
+		block header
+			+header()
+		
+		.row.no-gutters
+			.col-12
+				.Content
+					block headerBottom
+		.row.no-gutters
+			.col-12.col-md-12
+				.row.no-gutters
+					.col-12.mt-5
+						.Content.MainContent.pl-5.pr-5.mb-5
+							block content
+			//.col-12.col-md-3
+				block sidebar
+					+sidebar()
+	block footer
+		.row.no-gutters
+			+footer()
+	block scripts

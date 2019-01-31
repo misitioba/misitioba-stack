@@ -1,0 +1,89 @@
+module.exports = app => {
+	var _ = app.require('lodash');
+
+	app.get('/', (req, res) => {
+		res.send('APIBA')
+	})
+
+	app.get('/error', (req, res) => {
+		console.error('ERROR', '[TEST ERROR]')
+		res.send('ERROR SEND')
+	})
+
+	const bodyParser = app.require('body-parser');
+	const parseJson = bodyParser.json({
+		limit: '50mb'
+	})
+	
+	app.post('/browse', parseJson, wrapRoute(async (req, res) => {
+		validatePayload(req)
+		res.json({
+			result: await collection(app, req).find(req.body.data, req.body.options).toArray()
+		})
+	}));
+	app.post('/read', parseJson, wrapRoute(async (req, res) => {
+		validatePayload(req)
+		var r = await collection(app, req).findOne(req.body.data)
+		console.log('TRACE read', req.body.data, r)
+		res.json({
+			result: r
+		})
+	}));
+	app.post('/remove', parseJson, wrapRoute(async (req, res) => {
+		validatePayload(req)
+		res.json({
+			result: await collection(app, req).deleteOne(req.body.data)
+		})
+	}));
+	app.post('/save', parseJson, wrapRoute(async (req, res) => {
+		validatePayload(req)
+		var result;
+		var data = _.omit(req.body.data, [])
+		delete data._id
+		console.log('TRACE save', req.body.data, req.body.options)
+		if (req.body.options.match) {
+			result = await collection(app, req).findOneAndUpdate(req.body.options.match, {
+				$set: data
+			}, {
+				upsert: true
+			})
+		} else {
+			result = await collection(app, req).insert(data)
+		}
+		res.json({
+			result
+		})
+	}))
+}
+
+function collection(app, req) {
+	return app.mongo.db('wrapkend').collection(req.body.namespace + '_' + req.body.collection)
+}
+
+function wrapRoute(handler) {
+	return async function(req, res) {
+		try {
+			await handler(req, res)
+		} catch (err) {
+			console.error('WARN', '[ROUTE ERROR]', err.stack)
+			res.json({
+				err: err.stack
+			})
+		}
+	}
+}
+
+function validatePayload(req) {
+	if (!req.body.namespace) {
+		throw new Error('CONFIGURATION_REQUIRED')
+	}
+	if (!req.body.collection) {
+		throw new Error('COLLECTION_REQUIRED')
+	}
+	if (!req.body.data) {
+		throw new Error('DATA_REQUIRED')
+	}
+	if (!req.body.options) {
+		throw new Error('OPTIONS_REQUIRED')
+	}
+}

@@ -1,0 +1,63 @@
+var url = 'https://apiba.wrapkend.com/';
+var namespace = ''
+module.exports = app => {
+	var rp = app.require('request-promise')
+	async function post(url, data) {
+		//return [];
+		var options = {
+			method: 'POST',
+			uri: url,
+			body: data,
+			json: true
+		};
+		var r = await rp(options)
+		if(r.err) throw new Error(r.err);
+		else return r.result || r;
+	}
+	return {
+		configure: (_namespace) => {
+			namespace = _namespace;
+		},
+		browse: (collection, data, options) => {
+			validate();
+			return post(url + 'browse', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		},
+		read: (collection, data, options) => {
+			console.log('TRACE misitiobaApi read',collection,data,options)
+			validate();
+			return post(url + 'read', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		},
+		save: (collection, data, options) => {
+			validate();
+			return post(url + 'save', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		},
+		remove: (collection, data, options) => {
+			validate();
+			return post(url + 'remove', {
+				namespace,
+				collection,
+				data,
+				options: options || {}
+			})
+		}
+	}
+}
+
+function validate() {
+	if (!namespace) throw new Error('CONFIGURATION_ERROR')
+}

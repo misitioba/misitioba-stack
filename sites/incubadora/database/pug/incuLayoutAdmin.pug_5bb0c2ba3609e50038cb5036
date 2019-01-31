@@ -1,0 +1,37 @@
+include incuMixins
+
+head
+	script.
+		let auth = window.localStorage.getItem('auth')
+		if(auth&&auth==='admin'){
+			
+		}else{
+			window.location.href="/admin/login"
+		}
+	+head()
+	script.
+		var initialState = JSON.parse(`!{JSON.stringify(initialState||{})}`)
+	block head
+		title Incubadora Itinerante - Admin
+body
+	#app
+		block header
+			+header()
+		
+		.row.no-gutters
+			.col-12
+				.Content.HeaderBottom.pl-5.pr-5
+					block headerBottom
+		.row.no-gutters
+			.col-12
+				.row.no-gutters
+					.col-12.mt-5
+						.Content.MainContent.pl-5.pr-5.mb-5
+							block content
+			
+	block footer
+		.row.no-gutters
+			+footer()
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js")
+	block scripts

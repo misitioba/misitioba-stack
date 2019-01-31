@@ -1,0 +1,2 @@
+PORT=8235
+DB_URI=mongodb://root:[pass]@178.128.254.49:27017/wrapkend?authSource=admins

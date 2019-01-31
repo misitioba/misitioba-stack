@@ -1,0 +1,68 @@
+module.exports = async app => {
+
+	const atob = app.require('atob');
+	const marked = app.require('marked');
+	
+	app.get('/admin/articles', async (req, res) => {
+		let articles = await app.srv.misitiobaApi.browse('articles', {})
+		articles = articles.map(a=>{
+			try{
+				a.html = marked(a.contents);
+			}catch(err){
+				a.html = ""
+				console.error('ERROR',err.stack)
+			}
+			a.type = a.type||'article';
+			return a;
+		})
+		res.sendView('articles', {
+			articles
+		})
+	})
+
+	app.get('/admin/article/create', async (req, res) => {
+		res.sendView('article', {
+			article: {}
+		});
+	})
+
+	app.get('/admin/article/:name', wrapRoute(async (req, res) => {
+		var article = await app.srv.misitiobaApi.read('articles', {
+			name: {
+				$eq: req.params.name
+			}
+		});
+		res.sendView('article', {
+			article,
+			initialState: {
+				article
+			}
+		});
+	}))
+
+	function wrapRoute(handler) {
+		return async function(req, res) {
+			try {
+				await handler(req, res)
+			} catch (err) {
+				console.error('WARN', '[ROUTE ERROR]', err.stack)
+				res.json({
+					err: err.stack
+				})
+			}
+		}
+	}
+
+	/*
+	app.post('/article/save', (await app.fn.parseForm()), async (req, res) => {
+		try {
+			await app.srv.misitiobaApi.save('articles', req.body)
+			res.redirect('/noticias')
+		} catch (err) {
+			console.error('ERROR', '[While saving article]', err.stack)
+			res.sendView('article', {
+				article: req.body
+			})
+		}
+	})*/
+}

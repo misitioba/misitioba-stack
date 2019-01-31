@@ -1,0 +1,7 @@
+module.exports = app => (params = {}) => {
+	const bodyParser = app.require('body-parser');
+	const parseJson = bodyParser.json(Object.assign({
+		limit: '50mb'
+	},params))
+	return parseJson;
+}

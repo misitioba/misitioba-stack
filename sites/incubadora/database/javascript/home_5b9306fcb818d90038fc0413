@@ -1,0 +1,17 @@
+console.log('HOME')
+new Vue({
+	el:'#app',
+	data(){
+		return {}
+	},
+	methods:{
+		getText
+	},
+	mounted(){
+		
+	}
+})
+
+function getText(len){
+	return 'Donec egestas vestibulum ex vitae condimentum. Etiam sit amet vehicula velit. Phasellus maximus sem rutrum augue laoreet consectetur. Integer porta, urna lobortis pretium iaculis, tortor metus lobortis ligula, eget convallis massa elit at dui. Vivamus et molestie odio. Ut lorem mauris, imperdiet et vestibulum a, pharetra commodo nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt diam sed magna maximus, sed placerat mi venenatis. Curabitur in aliquet sem, pretium ultricies leo. Phasellus sagittis, elit at vehicula mattis, erat mauris tristique leo, eget vestibulum sem felis sit amet velit. Aliquam aliquam felis quam. Donec aliquet mattis ex sit amet dapibus. Mauris facilisis lacus vitae nibh viverra porta. Praesent congue eleifend nibh, ac porttitor lectus vulputate vitae. Cras laoreet faucibus dolor, sed volutpat est tincidunt in. Vestibulum hendrerit mauris pharetra magna cursus faucibus. Praesent eu lacus ex. Donec egestas vestibulum ex vitae condimentum. Etiam sit amet vehicula velit. Phasellus maximus sem rutrum augue laoreet consectetur. Integer porta, urna lobortis pretium iaculis, tortor metus lobortis ligula, eget convallis massa elit at dui. Vivamus et molestie odio. Ut lorem mauris, imperdiet et vestibulum a, pharetra commodo nisi.'.substring(0,len)
+}
