@@ -1,4 +1,7 @@
 {
+  "5ba88b23d3358688834de2f31":{
+    "name":"voluntarios"
+  },
   "5b928a7bdc86db003853220f": {
     "name": "home"
   },
@@ -39,7 +42,7 @@
     "name": "privacy-terms"
   },
   "5bcb511393e981004273c5bc": {
-    "name": "sectionNews"
+    "name": "dynamicNews"
   },
   "5bdd59d293e981004273c5bd": {
     "name": "location"

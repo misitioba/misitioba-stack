@@ -1,7 +1,11 @@
 extends incuLayout.pug
 block content
 	h1.text-center.mb-5 Donde estamos ahora?
-	nuestra-ubicacion(lat=address.latitude lng=address.longitude height="calc(100vh - 35px)" zoom="10")
+	div.
+		<style scoped>
+			#mapid { height: 500px; }
+		</style>
+		<div id="mapid"></div>
+	//nuestra-ubicacion(lat=address.latitude lng=address.longitude height="calc(100vh - 35px)" zoom="10")
 block scripts
-	script(src="https://res.cloudinary.com/misitioba/raw/upload/v1541235559/incubadora_itinerante/scripts/nuestra-ubicacion.min.js")
-	
+	+locationMapScript()

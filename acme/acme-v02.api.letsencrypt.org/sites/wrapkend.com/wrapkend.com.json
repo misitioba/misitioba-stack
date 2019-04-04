@@ -1,5 +1,5 @@
 {
 	"domain": "wrapkend.com",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03d109241d0f9d1d75a6952447d005e73fb8",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03d109241d0f9d1d75a6952447d005e73fb8"
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0354e1291b7657dc529056fe8654a92c6be2",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0354e1291b7657dc529056fe8654a92c6be2"
 }

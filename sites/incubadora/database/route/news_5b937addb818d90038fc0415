@@ -3,8 +3,9 @@ module.exports = app => {
 	const marked = app.require('marked');
 
 
-	app.get('/noticias', async (req, res) => getNoticias(req, res, 'sectionNews'));
-	app.get('/noticias/dev', async (req, res) => getNoticias(req, res, 'news'));
+	app.get('/noticias', async (req, res) => getNoticias(req, res, 'dynamicNews'));
+	app.get('/proyectos-visitados', async (req, res) => getNoticias(req, res, 'dynamicNews'));
+	//app.get('/noticias/dev', async (req, res) => getNoticias(req, res, 'news'));
 	
 
 	async function getNoticias(req, res, view) {
@@ -21,6 +22,10 @@ module.exports = app => {
 		items = items.filter(i => !i.draft)
 		
 		items = items.reverse()
+		
+		items = items.sort(function(a,b){
+			return (a.order && a.order||99) <= (b.order&&b.order||99) ? -1 : 1
+		})
 		
 		res.sendView(view, {
 			items,

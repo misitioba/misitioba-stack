@@ -2,13 +2,13 @@
     "foo": 6,
     "temp": [],
     "location": {
-        "route": "Peru",
-        "locality": "Huaraz",
-        "administrative_area_level_1": "Áncash",
+        "route": "Lima",
+        "locality": "Miraflores",
+        "administrative_area_level_1": "Municipalidad Metropolitana de Lima",
         "country": "Perú",
-        "latitude": -9.5395626,
-        "longitude": -77.52300930000001,
-        "formatted_address": "Peru, Huaraz, Perú",
-        "postal_code": "15026"
+        "latitude": -12.122031,
+        "longitude": -77.03015340000002,
+        "formatted_address": "Lima, Miraflores 15074, Perú",
+        "postal_code": "15074"
     }
 }

@@ -21,9 +21,13 @@ mixin articleDetails(article)
 		.col-12.mt-3
 			label Short description (for thumbs)
 			input.form-control(v-model="item.shortDescription")
-		.col-12.mt-3
+		.col-6.mt-3
 			label Borrador? (Marcar para ocultar en la seccion noticias)
 			input.form-control(type="checkbox" v-model="item.draft")
+		.col-6.mt-3
+			label Orden
+			p Los articulos se ordenan de menor a mayor.
+			input.form-control(type="number" step="1" v-model="item.order")
 		.col-12.col-lg-6.mt-4.p-2
 			.row.no-gutters
 				.col-12
@@ -69,15 +73,14 @@ mixin header()
 					img(src="https://res.cloudinary.com/misitioba/image/upload/v1537767994/incubadora_itinerante/logo.png")
 			.col-12.col-md-8.mt-2.mb-2
 				.Navbar.d-flex.justify-content-right.align-items-center
-					.row.no-gutters.w-100
-						.col-12.col-md-4.Flex
-							a(href="/")!='La&nbsp;incubadora'
-						.col-12.col-md-4.Flex
-							a(href="/noticias") Noticias
-						.col-12.col-md-4.Flex
-							a(href="/donde-estamos") Donde estamos
-						//.col-12.col-md-4.Flex
-							a(href="/recursos") Recursos
+					.NavItem
+						a(href="/")!='La&nbsp;incubadora'
+					.NavItem
+						a(href="/proyectos-visitados") Proyectos visitados
+					.NavItem
+						a(href="/red-voluntarios")!="Red&nbsp;de&nbsp;voluntarios"
+					.NavItem
+						a(href="/recursos") Recursos para emprendedores
 
 mixin section(title)
 	.row.no-gutters
@@ -184,8 +187,30 @@ mixin main()
 	+como_te_ayudamos()
 	//+section("Como te podemos ayudar ?")
 	//+ayudas()
+	.LocationWrapper
+		+locationMapSmall()
 	+team()
 	+partners()
+	
+mixin locationMapSmall()
+	h1.mt-4 Donde estamos ahora?
+	div.
+		<div id="mapid" class="mapSmall"></div>
+
+mixin locationMapScript()
+	script(src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin="")
+	script.
+		var cl = window.currentLocation;
+		var DONDE_ESTAMOS = cl && cl.coords || [-19.0330436,-65.2645136];
+		var mymap = L.map('mapid',{
+			center: DONDE_ESTAMOS,
+			zoom: cl && cl.zoom || 14
+		});
+		L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(mymap)
 
 mixin partners()
 	.row.no-gutters
@@ -200,10 +225,10 @@ mixin partners()
 					
 					.col-12.col-md-6.col-lg-4.d-flex.justify-content-center.align-items-center.p-4
 						a(href="https://www.bondinnov.com/" target="_blank")
-							img.mx-auto.d-block.img-fluid(src="https://res.cloudinary.com/misitioba/image/upload/v1539032477/incubadora_itinerante/bondinov_knohf7.webp")
+							img.mx-auto.d-block.img-fluid(src="https://res.cloudinary.com/misitioba/image/upload/v1539032477/incubadora_itinerante/bondinov_knohf7.webp" style="max-width:160px")
 					.col-12.col-md-6.col-lg-4.d-flex.justify-content-start.align-items-center.p-4
 						a(href="http://wearereadynow.net/nosprojets/" target="_blank")
-							img.mx-auto.d-block.img-fluid(src="https://res.cloudinary.com/misitioba/image/upload/c_scale,w_225/v1539032052/weexplore_xcorxu.png" style="max-width:150px")
+							img.mx-auto.d-block.img-fluid(src="https://res.cloudinary.com/misitioba/image/upload/c_scale,w_225/v1539032052/weexplore_xcorxu.png" style="max-width:140px")
 
 mixin lastNews()
 	.col-12.col-sm-6.col-md-12
@@ -226,21 +251,32 @@ mixin sidebar()
 						
 
 mixin footer()
+	div.
+		<div class="fb-customerchat"
+		attribution=setup_tool
+		page_id="185570248833590"
+		theme_color="#324A5D"
+		logged_in_greeting="Hola !, Como te podemos ayudar?"
+		logged_out_greeting="Hola !, Como te podemos ayudar?">
+		</div>
+	.col-12.mt-4
+		.row.no-gutters
+				.col-12.mb-1
+					div.mx-auto.d-block(style="width: fit-content;").
+						<div class="fb-page" data-href="https://www.facebook.com/incubadoraitinerante/" data-width="380"  data-hide-cover="false" data-show-facepile="false"></div>
 	.col-12.mt-4
 		footer
 			.row.no-gutters
 				.col-12.col-md-6.d-flex.flex-column
-					a(href="https://www.facebook.com/profile.php?id=185570248833590" target="_blank")!='Seguinos&nbsp;en&nbsp;facebook'
-					a(href="mailto:incubadoraitinerante@gmail.com" target="_blank") Contactanos
+					a(href="/red-voluntarios") Red de voluntarios
+					a(href="https://www.facebook.com/profile.php?id=185570248833590" target="_blank") Noticias
+					a(href="/donde-estamos") Nuestra ubicacion actual
 				.col-12.col-md-6
 					div.float-md-right.d-flex.flex-column-reverse
-						a(href="/noticias" target="_blank") Te visitamos
-						a(href="/noticias") Ultimas noticias
-						a(href="#" target="_blank") Recursos para emprendedores
-			//div.mx-auto.d-block
-				a(href="https://www.facebook.com/profile.php?id=185570248833590" target="_blank")
-					span Seguinos en
-					i.ml-2.fab.fa-facebook
+						a(href="mailto:incubadoraitinerante@gmail.com" target="_blank") Contactanos
+						a(href="https://www.facebook.com/profile.php?id=185570248833590" target="_blank")!='Seguinos&nbsp;en&nbsp;facebook'
+						
+	
 	script(src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous")

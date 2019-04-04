@@ -16,9 +16,25 @@
 	border: 1px solid white;
 	padding: 20px;
 	border-radius: 20px;
-	-webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 4px 15px 5px rgba(72, 176, 183, 0);
-	box-shadow: 0px 10px 28px -7px rgba(0, 0, 0, .3), 0px 4px 15px 5px rgba(72, 176, 183, 0);
+	box-shadow: 0px 5px 28px -7px rgba(0, 0, 0, .3), 0px 4px 15px 5px rgba(72, 176, 183, 0);
 }
+
+.mapSmall { 
+	height: 350px; 
+}
+
+.LocationWrapper{
+		min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+.VolunteerCTAButton{
+display: block;
+    font-size: 30px;
+    padding: 20px;
+    }
 
 .ArticleThumbImage {
 	max-width: 100px;
@@ -205,17 +221,33 @@ footer a:hover {
 	align-items: center;
 }
 
-.Header .Navbar {
-	height: 100px;
+.NavItem{
+	padding: 0px 20px;
 }
 
-@media only screen and (min-width: 992px) {
-	.HomeVideo {
-		min-width: 540px;
+.Header .Navbar {
+	height: 100px;
+	flex-direction: column;
+  padding: 0px;
+  margin: 10px 0px;
+}
+
+
+.HomeVideo {
+	min-width: 540px;
+}
+@media only screen and (max-width: 540px) {
+	.HomeVideo{
+		min-width: calc(100vw);
 	}
+}
+
+
+@media only screen and (min-width: 992px) {
+	
 	.Header .Navbar {
 		float: right;
-		min-width: 500px;
+    
 	}
 }
 
@@ -235,7 +267,7 @@ footer a:hover {
 
 .Header a {
 	color: #324A5D !important;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 	text-align: center;
 	width: 100%;
@@ -276,6 +308,11 @@ footer a:hover {
 }
 
 @media only screen and (min-width: 768px) {
+	.Header .Navbar {
+		flex-direction: row;
+    margin: 0px;
+    width: fit-content;
+	}
 	.alignRightSm, .alignLeftSm {
 		display: flex;
 		align-items: center;
@@ -336,4 +373,47 @@ footer a:hover {
 .DropdownList p {
 	padding: 10px 20px;
 	margin: 0px;
+}
+
+
+.Resources{
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-content: center;
+	grid-gap: 10px;
+	grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+}
+.Resources .ritem{
+	padding: 50px;
+	background-color: #324a5d;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	transition: background-color 0.2s ease-in;
+	min-height: 300px;
+}
+@media only screen and (min-width:768px){
+	.Resources{
+		grid-template-columns: 1fr 1fr;
+	}
+}
+.Resources .rtext{
+	text-align: center;
+	font-size: 25px;
+	color: lightgrey;
+	margin: 0px;
+}
+.Resources p{
+	color: white;
+	margin: 0px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.Resources a:hover .ritem{
+	background-color: #324a5dcc;
+}
+.Resources a:hover .rtext{
+	color:white;
 }
