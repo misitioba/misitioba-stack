@@ -9,11 +9,6 @@ https://misitioba.com, https://www.misitioba.com {
 	root projects/ba-landing/public_html
 }
 
-https://mys.misitioba.com {
-	import wildcard_cert
-  proxy / localhost:8080
-}
-
 https://adminer.misitioba.com {
 	import wildcard_cert
   proxy / localhost:19995
@@ -61,20 +56,10 @@ https://hosting.misitioba.com {
 	root sites/ba-hosting
 }
 
-https://misitioba.wrapkend.com {
-  import wildcard_cert
-	root instances/misitioba/public_html
-}
-
-https://strawhats.misitioba.com {
-	import wildcard_cert
-	root projects/mys-hats/docs
-}
-
-https://incubadoraitinerante.com, http://incubadoraitinerante.com, https://www.incubadoraitinerante.com , http://www.incubadoraitinerante.com {
+https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
 	proxy / localhost:8200
 }
-https://wrapkend.com, http://wrapkend.com, https://www.wrapkend.com, http://www.wrapkend.com {
+https://wrapkend.com, https://www.wrapkend.com {
 	proxy / localhost:3601
 }
 
