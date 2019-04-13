@@ -9,10 +9,16 @@ https://misitioba.com, https://www.misitioba.com {
 	root projects/ba-landing/public_html
 }
 
+https://adminer.misitioba.com {
+	import wildcard_cert
+  proxy / localhost:19995
+  basicauth / root {%ROOT_PWD%}
+}
+
 https://netdata.misitioba.com {
 	import wildcard_cert
   proxy / localhost:19999
-  basicauth / root 1990
+  basicauth / root {%ROOT_PWD%}
 }
 
 https://docker.misitioba.com {
@@ -30,12 +36,12 @@ https://api.misitioba.com {
 	proxy / localhost:8084
 }
 
-https://editor.wrapkend.com {
+https://editor.misitioba.com {
 	import wildcard_cert
 	proxy / localhost:3503
 }
 
-https://apiba.wrapkend.com {
+https://mongoapi.misitioba.com {
 	import wildcard_cert
 	proxy / localhost:8235
 }
@@ -50,25 +56,17 @@ https://hosting.misitioba.com {
 	root sites/ba-hosting
 }
 
-https://misitioba.wrapkend.com {
-  import wildcard_cert
-	root instances/misitioba/public_html
-}
-
-https://incubadoraitinerante.com, http://incubadoraitinerante.com, https://www.incubadoraitinerante.com , http://www.incubadoraitinerante.com {
+https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
 	proxy / localhost:8200
 }
-https://wrapkend.com, http://wrapkend.com, https://www.wrapkend.com, http://www.wrapkend.com {
+
+https://wrapkend.misitioba.com {
 	proxy / localhost:3601
 }
 
-https://strawhatsdemo.misitioba.com {
-	import wildcard_cert
-	root projects/mys-hats/docs
+https://wrapkend.com, https://www.wrapkend.com {
+	redir https://wrapkend.misitioba.com
 }
 
-https://strawhatscollection.com {
-	root projects/mys-hats/docs
-}
 
 	

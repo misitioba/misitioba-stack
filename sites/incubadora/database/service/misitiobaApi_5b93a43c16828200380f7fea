@@ -1,4 +1,4 @@
-var url = 'https://apiba.wrapkend.com/';
+var url = 'https://mongoapi.misitioba.com/';
 var namespace = ''
 module.exports = app => {
 	var rp = app.require('request-promise')

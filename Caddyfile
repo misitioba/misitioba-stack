@@ -36,12 +36,12 @@ https://api.misitioba.com {
 	proxy / localhost:8084
 }
 
-https://editor.wrapkend.com {
+https://editor.misitioba.com {
 	import wildcard_cert
 	proxy / localhost:3503
 }
 
-https://apiba.wrapkend.com {
+https://mongoapi.misitioba.com {
 	import wildcard_cert
 	proxy / localhost:8235
 }
@@ -59,9 +59,12 @@ https://hosting.misitioba.com {
 https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
 	proxy / localhost:8200
 }
-https://wrapkend.com, https://www.wrapkend.com {
+
+https://wrapkend.misitioba.com {
 	proxy / localhost:3601
 }
 
+https://wrapkend.com, https://www.wrapkend.com {
+	redir https://wrapkend.misitioba.com
+}
 
-	

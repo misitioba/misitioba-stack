@@ -12,7 +12,3 @@ services:
         - 3601:3601
       command: npm run docker
       restart: always
-networks:
-  default:
-    external:
-      name: webproxy

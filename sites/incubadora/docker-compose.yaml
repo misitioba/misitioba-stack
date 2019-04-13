@@ -12,7 +12,3 @@ services:
         - 8200:8200
       command: npm run start
       restart: always
-networks:
-  default:
-    external:
-      name: webproxy
