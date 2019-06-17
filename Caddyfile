@@ -56,15 +56,22 @@ https://hosting.misitioba.com {
 	root sites/ba-hosting
 }
 
-https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
-	proxy / localhost:8200
-}
-
 https://wrapkend.misitioba.com {
 	proxy / localhost:3601
 }
 
-https://wrapkend.com, https://www.wrapkend.com {
-	redir https://wrapkend.misitioba.com
+https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
+	root projects/ii-landing/dist
 }
 
+bauges.misitioba.com {
+  import wildcard_cert
+	root projects/bauges/dist
+}
+https://enbauges.com, https://www.enbauges.com {
+	root projects/bauges/dist
+}
+alvaro.misitioba.com {
+  import wildcard_cert
+	root projects/alvaro/dist
+}

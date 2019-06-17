@@ -1,5 +1,5 @@
 {
 	"domain": "*.misitioba.com",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03b7565e7a24f83345d1345de003b38344ff",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03b7565e7a24f83345d1345de003b38344ff"
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03c1efed1a9d46137b9cfc478907f4d45153",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03c1efed1a9d46137b9cfc478907f4d45153"
 }

@@ -1,5 +1,5 @@
 {
 	"domain": "wrapkend.misitioba.com",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03e8e6df8ebb2338b2f09023f859d63e6d8f",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03e8e6df8ebb2338b2f09023f859d63e6d8f"
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03350bb6be3b1680dbd04e3aae45578d95d9",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03350bb6be3b1680dbd04e3aae45578d95d9"
 }

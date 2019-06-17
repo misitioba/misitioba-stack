@@ -1,0 +1,5 @@
+{
+	"domain": "www.enbauges.com",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03eec48dd0bbc79773693f2a199e9344600c",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03eec48dd0bbc79773693f2a199e9344600c"
+}
