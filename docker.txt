@@ -1,0 +1,1 @@
+docker run -ti -v /root/wraddy:/projects -p 7878:8080 -p 7879:8081 javimosch/mynode bash
