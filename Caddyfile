@@ -71,7 +71,12 @@ bauges.misitioba.com {
 https://enbauges.com, https://www.enbauges.com {
 	root projects/bauges/dist
 }
-alvaro.misitioba.com {
+
+https://alvaro.misitioba.com {
   import wildcard_cert
 	root projects/alvaro/dist
+}
+https://savoie.misitioba.com {
+	import wildcard_cert
+	proxy / localhost:7373
 }

@@ -34,10 +34,14 @@ services:
    container_name: adminer
    ports:
       - 19995:8080
+   networks:
+    - backend
   mysql:
     image: mariadb:10.2.21
     container_name: mysql
     restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql 
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PWD}
       ## Use % to allow remote access to all addresses. 
@@ -48,6 +52,8 @@ services:
       #MYSQL_ROOT_HOST: 192.168.0.48/255.255.255.248
     ports:
       - 3306:3306
+    networks:
+      - backend
   mongo:
     image: mongo
     restart: always
@@ -72,3 +78,5 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_ROOT_PWD}
 volumes:
   portainer_data:
+networks:
+  backend:
