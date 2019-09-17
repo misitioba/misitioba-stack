@@ -36,11 +36,6 @@ https://api.misitioba.com {
 	proxy / localhost:8084
 }
 
-https://editor.misitioba.com {
-	import wildcard_cert
-	proxy / localhost:3503
-}
-
 https://mongoapi.misitioba.com {
 	import wildcard_cert
 	proxy / localhost:8235
@@ -56,10 +51,6 @@ https://hosting.misitioba.com {
 	root sites/ba-hosting
 }
 
-https://wrapkend.misitioba.com {
-	proxy / localhost:3601
-}
-
 https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
 	root projects/ii-landing/dist
 }
@@ -68,6 +59,7 @@ bauges.misitioba.com {
   import wildcard_cert
 	root projects/bauges/dist
 }
+
 https://enbauges.com, https://www.enbauges.com {
 	root projects/bauges/dist
 }
@@ -76,7 +68,28 @@ https://alvaro.misitioba.com {
   import wildcard_cert
 	root projects/alvaro/dist
 }
+
 https://savoie.misitioba.com {
 	import wildcard_cert
 	proxy / localhost:7373
 }
+
+https://montech.misitioba.com {
+  import wildcard_cert
+	root projects/montpesites/apps/montpets/public_html
+}
+
+https://lesbaujardins.misitioba.com {
+	import wildcard_cert
+	redir https://savoie.misitioba.com/basket-hot?org=lesbaujardins
+}
+
+
+
+#laravel.misitioba.com {
+#	import wildcard_cert
+#    root ./public
+#    log ./storage/logs/caddy-access.log
+#    errors ./storage/logs/caddy-error.log
+#	proxy / localhost:7378
+#}
