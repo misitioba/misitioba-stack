@@ -46,11 +46,6 @@ https://cms.misitioba.com {
 	proxy / localhost:8130
 }
 
-https://hosting.misitioba.com {
-	import wildcard_cert
-	root sites/ba-hosting
-}
-
 https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
 	root projects/ii-landing/dist
 }
@@ -76,15 +71,18 @@ https://savoie.misitioba.com {
 
 https://montech.misitioba.com {
   import wildcard_cert
-	root projects/montpesites/apps/montpets/public_html
+	root projects/montech/public_html
+}
+
+https://arancibiajav.misitioba.com {
+  import wildcard_cert
+	root projects/arancibiajav/public_html
 }
 
 https://lesbaujardins.misitioba.com {
 	import wildcard_cert
 	redir https://savoie.misitioba.com/basket-hot?org=lesbaujardins
 }
-
-
 
 #laravel.misitioba.com {
 #	import wildcard_cert
