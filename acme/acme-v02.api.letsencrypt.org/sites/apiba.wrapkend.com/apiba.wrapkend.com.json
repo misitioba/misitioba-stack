@@ -1,5 +1,0 @@
-{
-	"domain": "apiba.wrapkend.com",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03bd3d5db50e2434c0b652f294b010245f6b",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03bd3d5db50e2434c0b652f294b010245f6b"
-}

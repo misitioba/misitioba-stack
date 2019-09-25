@@ -1,8 +1,0 @@
-module.exports = app => (params = {}) => {
-	const bodyParser = app.require('body-parser');
-	const parseForm = bodyParser.urlencoded(Object.assign({
-		limit: '50mb',
-		extended: false
-	}, params))
-	return parseForm;
-}

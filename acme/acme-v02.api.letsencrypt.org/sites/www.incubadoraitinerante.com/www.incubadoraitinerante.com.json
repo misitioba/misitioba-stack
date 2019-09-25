@@ -1,5 +1,0 @@
-{
-	"domain": "www.incubadoraitinerante.com",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03cd3310d4e2f1daa81b80aac041f4fc8be5",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03cd3310d4e2f1daa81b80aac041f4fc8be5"
-}

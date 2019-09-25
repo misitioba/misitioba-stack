@@ -1,5 +1,0 @@
-{
-	"domain": "docker.misitioba.com",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/032965a2d61620c2fe054d400f221c5b4eb7",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/032965a2d61620c2fe054d400f221c5b4eb7"
-}

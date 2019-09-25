@@ -1,13 +1,42 @@
-# Wraddy
+# misitioba-stack
 
-Homemade solution for self-hosting NodeJS & Static web apps.
+Docker stack (docker-compose) for misitioba.com
 
-### How to run
+## Features
 
-pm2 start index.js --name "ba" --log pm2.log --no-autorestart
+- netdata
+- portainer
+- mongo + gui (mongo-express)
+- mysql + gui (adminer)
 
-### Enviroment requeriments
+## Enviromental variables
 
-- git
-- node
-- pm2
+```md
+MONGO_ROOT_USERNAME=
+MONGO_ROOT_PWD=
+MYSQL_ROOT_PWD=
+```
+
+## Usage
+
+- Copy env-example into .env
+
+- Configure .env
+
+- Run compose in headless mode
+
+    ```js
+    docker-compose up -d
+    ```
+
+## Database data
+
+The data is persistent and mounted from:
+
+- ./mongo
+- ./mysql
+
+## Questions
+
+- misitioba.com
+- arancibiajav@gmail.com
