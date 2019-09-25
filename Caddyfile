@@ -47,7 +47,7 @@ https://cms.misitioba.com {
 }
 
 https://incubadoraitinerante.com, https://www.incubadoraitinerante.com {
-	root projects/ii-landing/dist
+	root projects/incubadora-itinerante/dist
 }
 
 bauges.misitioba.com {
@@ -69,9 +69,13 @@ https://savoie.misitioba.com {
 	proxy / localhost:7373
 }
 
-https://montech.misitioba.com {
+https://montpedigital.misitioba.com {
   import wildcard_cert
-	root projects/montech/public_html
+  root projects/montpedigital/public_html
+}
+
+https://montech.misitioba.com {
+  redir / https://montpedigital.misitioba.com 301
 }
 
 https://arancibiajav.misitioba.com {
