@@ -53,6 +53,7 @@ services:
       - 3306:3306
     networks:
       - backend
+      - caddy
   mongo:
     image: mongo
     restart: always
