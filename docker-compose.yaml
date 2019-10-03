@@ -60,6 +60,7 @@ services:
     container_name: mongo-db
     volumes:
      - ./mongo/data:/data/db
+     - ./mongo:/mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PWD}
